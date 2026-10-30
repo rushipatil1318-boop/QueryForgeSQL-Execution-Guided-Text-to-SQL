@@ -1,0 +1,11 @@
+.git
+.venv
+venv
+__pycache__
+*.pyc
+data
+runs
+.env
+.env.*
+*.zip
+reports

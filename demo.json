@@ -1,0 +1,7 @@
+{
+  "seed": 42,
+  "max_repairs": 2,
+  "schema_top_k": 4,
+  "columns_per_table": 12,
+  "model": {"provider": "fixture", "model": "fixture-not-an-llm"}
+}

@@ -1,0 +1,2 @@
+# Pinned parser. sqlite3, HTTP, CLI, JSON and unit tests use Python's standard library.
+sqlglot==30.27.0

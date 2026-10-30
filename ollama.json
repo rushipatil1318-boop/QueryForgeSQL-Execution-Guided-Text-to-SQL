@@ -1,0 +1,26 @@
+{
+  "seed": 42,
+  "max_repairs": 2,
+  "schema_top_k": 4,
+  "columns_per_table": 16,
+  "max_prompt_chars": 30000,
+  "use_evidence": true,
+  "limits": {
+    "wall_seconds": 8,
+    "cpu_seconds": 3,
+    "process_memory_mb": 256,
+    "sqlite_heap_mb": 64,
+    "max_rows": 10000,
+    "max_result_bytes": 2000000,
+    "max_sql_chars": 16000,
+    "max_ast_nodes": 1500
+  },
+  "model": {
+    "provider": "ollama",
+    "model": "qwen2.5-coder:1.5b",
+    "endpoint": "http://127.0.0.1:11434/api/chat",
+    "timeout_seconds": 180,
+    "max_output_tokens": 512,
+    "temperature": 0
+  }
+}

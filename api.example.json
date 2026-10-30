@@ -1,0 +1,18 @@
+{
+  "seed": 42,
+  "max_repairs": 2,
+  "schema_top_k": 4,
+  "columns_per_table": 16,
+  "use_evidence": true,
+  "model": {
+    "provider": "chat_completions",
+    "model": "REPLACE_WITH_YOUR_MODEL_ID",
+    "endpoint": "https://REPLACE_WITH_YOUR_PROVIDER/v1/chat/completions",
+    "api_key_env": "QUERYFORGE_API_KEY",
+    "timeout_seconds": 120,
+    "max_output_tokens": 512,
+    "temperature": 0,
+    "input_usd_per_million": null,
+    "output_usd_per_million": null
+  }
+}

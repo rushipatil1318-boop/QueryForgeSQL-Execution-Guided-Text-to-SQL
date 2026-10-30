@@ -1,0 +1,14 @@
+seed=42 baseline demo_revenue         status=sql_error        strict_match=False calls=1
+seed=42 baseline demo_count           status=ok               strict_match=True calls=1
+seed=42 baseline demo_invalid         status=validation_error strict_match=False calls=1
+seed=42 baseline demo_semantic        status=ok               strict_match=False calls=1
+seed=42 baseline demo_empty           status=ok               strict_match=True calls=1
+seed=42 baseline demo_exhaust         status=sql_error        strict_match=False calls=1
+seed=42 feedback demo_revenue         status=ok               strict_match=True calls=2
+seed=42 feedback demo_count           status=ok               strict_match=True calls=1
+seed=42 feedback demo_invalid         status=ok               strict_match=True calls=2
+seed=42 feedback demo_semantic        status=ok               strict_match=False calls=1
+seed=42 feedback demo_empty           status=ok               strict_match=True calls=1
+seed=42 feedback demo_exhaust         status=sql_error        strict_match=False calls=3
+Saved complete logs and summary: runs/reference_v1
+Demo finished. Responses were SCRIPTED; no LLM was called and no BIRD accuracy was measured.

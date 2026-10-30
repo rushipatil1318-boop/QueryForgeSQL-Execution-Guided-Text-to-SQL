@@ -1,0 +1,56 @@
+test_changed_database_is_rejected_by_manifest (test_data.DataTests.test_changed_database_is_rejected_by_manifest) ... ok
+test_database_leakage_is_detected (test_data.DataTests.test_database_leakage_is_detected) ... ok
+test_disjoint_split_is_accepted (test_data.DataTests.test_disjoint_split_is_accepted) ... ok
+test_download_rejects_wrong_hash_without_writing (test_data.DataTests.test_download_rejects_wrong_hash_without_writing) ... ok
+test_download_retries_connection_reset_then_uses_cache (test_data.DataTests.test_download_retries_connection_reset_then_uses_cache) ... ok
+test_duplicate_question_across_databases_is_detected (test_data.DataTests.test_duplicate_question_across_databases_is_detected) ... ok
+test_local_import_copies_offline_snapshot_and_preserves_provenance (test_data.DataTests.test_local_import_copies_offline_snapshot_and_preserves_provenance) ... ok
+test_normalization_handles_unicode_case_and_whitespace (test_data.DataTests.test_normalization_handles_unicode_case_and_whitespace) ... ok
+test_retrieval_is_deterministic_and_keeps_join_keys (test_data.DataTests.test_retrieval_is_deterministic_and_keeps_join_keys) ... ok
+test_selection_is_stable_independent_of_source_order (test_data.DataTests.test_selection_is_stable_independent_of_source_order) ... ok
+test_missing_database_does_not_create_a_file (test_database.DatabaseTests.test_missing_database_does_not_create_a_file) ... ok
+test_no_partial_result_is_scored_at_row_limit (test_database.DatabaseTests.test_no_partial_result_is_scored_at_row_limit) ... ok
+test_path_traversal_and_missing_database_are_rejected (test_database.DatabaseTests.test_path_traversal_and_missing_database_are_rejected) ... ok
+test_readonly_aggregate_has_expected_answer (test_database.DatabaseTests.test_readonly_aggregate_has_expected_answer) ... ok
+test_readonly_connection_blocks_write_without_parser (test_database.DatabaseTests.test_readonly_connection_blocks_write_without_parser) ... ok
+test_recursive_query_stops_at_deadline (test_database.DatabaseTests.test_recursive_query_stops_at_deadline) ... ok
+test_runtime_authorizer_blocks_nonapproved_function (test_database.DatabaseTests.test_runtime_authorizer_blocks_nonapproved_function) ... ok
+test_runtime_authorizer_blocks_write_on_otherwise_writable_connection (test_database.DatabaseTests.test_runtime_authorizer_blocks_write_on_otherwise_writable_connection) ... ok
+test_schema_contains_columns_and_relationships (test_database.DatabaseTests.test_schema_contains_columns_and_relationships) ... ok
+test_small_byte_budget_is_enforced (test_database.DatabaseTests.test_small_byte_budget_is_enforced) ... ok
+test_worker_independently_blocks_mutation (test_database.DatabaseTests.test_worker_independently_blocks_mutation) ... ok
+test_empty_results_with_different_width_are_not_a_match (test_evaluation.ComparisonTests.test_empty_results_with_different_width_are_not_a_match) ... ok
+test_no_order_by_compares_bags (test_evaluation.ComparisonTests.test_no_order_by_compares_bags) ... ok
+test_order_by_requires_order_for_strict_metric (test_evaluation.ComparisonTests.test_order_by_requires_order_for_strict_metric) ... ok
+test_reference_timeout_is_disclosed_not_scored_as_match (test_evaluation.ComparisonTests.test_reference_timeout_is_disclosed_not_scored_as_match) ... ok
+test_unordered_comparison_preserves_duplicate_counts (test_evaluation.ComparisonTests.test_unordered_comparison_preserves_duplicate_counts) ... ok
+test_demo_is_paired_logged_and_resumable (test_evaluation.ExperimentTests.test_demo_is_paired_logged_and_resumable) ... ok
+test_baseline_makes_one_call (test_pipeline.PipelineTests.test_baseline_makes_one_call) ... ok
+test_executable_wrong_query_does_not_trigger_oracle_repair (test_pipeline.PipelineTests.test_executable_wrong_query_does_not_trigger_oracle_repair) ... ok
+test_execution_error_can_be_repaired (test_pipeline.PipelineTests.test_execution_error_can_be_repaired) ... ok
+test_gold_cannot_enter_public_pipeline (test_pipeline.PipelineTests.test_gold_cannot_enter_public_pipeline) ... ok
+test_missing_usage_is_not_reported_as_zero_cost (test_pipeline.PipelineTests.test_missing_usage_is_not_reported_as_zero_cost) ... ok
+test_model_failure_stops_loop (test_pipeline.PipelineTests.test_model_failure_stops_loop) ... ok
+test_network_provider_rejects_plaintext_remote_credentials (test_pipeline.PipelineTests.test_network_provider_rejects_plaintext_remote_credentials) ... ok
+test_never_exceeds_two_repairs (test_pipeline.PipelineTests.test_never_exceeds_two_repairs) ... ok
+test_public_examples_exclude_reference_sql (test_pipeline.PipelineTests.test_public_examples_exclude_reference_sql) ... ok
+test_validation_failure_is_repaired_before_execution (test_pipeline.PipelineTests.test_validation_failure_is_repaired_before_execution) ... ok
+test_chat_completion_reads_usage_and_key_from_environment (test_providers.ProviderTests.test_chat_completion_reads_usage_and_key_from_environment) ... ok
+test_http_error_is_one_call_and_does_not_expose_body (test_providers.ProviderTests.test_http_error_is_one_call_and_does_not_expose_body) ... ok
+test_incomplete_output_is_not_executed (test_providers.ProviderTests.test_incomplete_output_is_not_executed) ... ok
+test_missing_text_is_recorded_as_model_error (test_providers.ProviderTests.test_missing_text_is_recorded_as_model_error) ... ok
+test_ollama_sends_bounded_seeded_nonstreaming_request (test_providers.ProviderTests.test_ollama_sends_bounded_seeded_nonstreaming_request) ... ok
+test_current_clock_queries_require_fixed_dates (test_validation.ValidationTests.test_current_clock_queries_require_fixed_dates) ... ok
+test_empty_nul_and_oversize_are_rejected (test_validation.ValidationTests.test_empty_nul_and_oversize_are_rejected) ... ok
+test_extension_file_io_and_metadata_are_rejected (test_validation.ValidationTests.test_extension_file_io_and_metadata_are_rejected) ... ok
+test_multiple_statements_are_rejected (test_validation.ValidationTests.test_multiple_statements_are_rejected) ... ok
+test_mutations_and_commands_are_rejected (test_validation.ValidationTests.test_mutations_and_commands_are_rejected) ... ok
+test_repair_budget_and_limits_are_checked (test_validation.ValidationTests.test_repair_budget_and_limits_are_checked) ... ok
+test_select_cte_and_union_are_accepted (test_validation.ValidationTests.test_select_cte_and_union_are_accepted) ... ok
+test_sql_fence_is_extracted_but_prose_is_not_guessed (test_validation.ValidationTests.test_sql_fence_is_extracted_but_prose_is_not_guessed) ... ok
+test_write_inside_cte_is_rejected (test_validation.ValidationTests.test_write_inside_cte_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 51 tests in 4.342s
+
+OK
