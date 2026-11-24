@@ -1,4 +1,12 @@
-# छोटे implementation tasks
+# QueryForgeSQL — Execution-Guided Text-to-SQL
+
+**Status:** learning and research baseline; actual-model and BIRD database evaluation are pending.
+
+The project converts natural-language questions to SQLite queries using schema retrieval, SQLGlot validation, bounded read-only execution and at most two repair attempts. A scripted six-question demonstration exercises execution errors, unsafe queries and incorrect but executable answers. Its outcomes are software tests, not model accuracy.
+
+Start with the repository's `START_HERE_MR.md` guide. Read `VALIDATION.md` for the assistant-generated reference-run provenance and scope, and `EXPERIMENTS.md` for the planned controlled comparison. The exercises below remain part of the learning project.
+
+## छोटे implementation tasks
 
 Working baseline आधी चालव. Exercises स्वतंत्र आहेत; production files delete करण्याची गरज नाही. `lesson01.py` मध्ये working reference दिली आहे. बदल करण्यापूर्वी ती समजून घे.
 
