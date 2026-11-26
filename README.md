@@ -1,32 +1,58 @@
-# QueryForgeSQL — Execution-Guided Text-to-SQL
+# QueryForgeSQL: Execution-Guided Text-to-SQL
 
-**Status:** learning and research baseline; actual-model and BIRD database evaluation are pending.
+**Status: in progress.** The pipeline and its tests work. Evaluation with a real model on BIRD databases is still to do.
 
-The project converts natural-language questions to SQLite queries using schema retrieval, SQLGlot validation, bounded read-only execution and at most two repair attempts. A scripted six-question demonstration exercises execution errors, unsafe queries and incorrect but executable answers. Its outcomes are software tests, not model accuracy.
+QueryForgeSQL turns a natural-language question into a SQLite query. It retrieves the relevant part of the schema, asks a model for SQL, checks that SQL before running it, executes it read-only in a sandbox, and if something fails it sends the error back to the model for at most two repairs. The project compares this feedback loop against a plain one-shot baseline.
 
-Start with the repository's `START_HERE_MR.md` guide. Read `VALIDATION.md` for the assistant-generated reference-run provenance and scope, and `EXPERIMENTS.md` for the planned controlled comparison. The exercises below remain part of the learning project.
+## How it works
 
-## छोटे implementation tasks
+1. **Schema retrieval.** Tables and columns are ranked by word overlap with the question, and related foreign keys are added to the prompt.
+2. **Generation.** A provider adapter calls the model (a local Ollama model or an OpenAI-compatible API). A scripted `fixture` provider is used for the tests and the demo.
+3. **Validation.** SQLGlot parses the SQL and allows only one read-only query. Writes, multiple statements and disallowed functions are rejected.
+4. **Sandboxed execution.** Queries run in a separate SQLite worker process with time, memory, row and output limits.
+5. **Repair.** Validation or execution errors (never the reference answer) go back to the model, at most twice.
+6. **Evaluation.** Baseline and feedback run on the same questions with the same first prompt. Results are compared as multisets of rows; order only counts when the reference query sorts. Runs are logged and can be resumed.
 
-Working baseline आधी चालव. Exercises स्वतंत्र आहेत; production files delete करण्याची गरज नाही. `lesson01.py` मध्ये working reference दिली आहे. बदल करण्यापूर्वी ती समजून घे.
+## Quick start
 
-## Task 1 — स्वतः duplicate counting लिही
+```bash
+python -m venv .venv
+source .venv/bin/activate            # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
 
-VS Code मध्ये `exercises/lesson01.py` उघड. `bag_equal` मधला `Counter` वापर काढून दोन साधे dictionaries आणि `for` loops वापरून तसाच result मिळव. Function signature कायम ठेव. Input lists बदलू नकोस. हे SQL result मधले duplicates का महत्त्वाचे आहेत ते शिकवते.
-
-Input: दोन lists of hashable row tuples. Output: counts समान असतील तर `True`, नाहीतर `False`. उदाहरण: `[(1,), (2,)]` आणि `[(2,), (1,)]` match; `[(1,)]` आणि `[(1,), (1,)]` mismatch.
-
-```powershell
-.\.venv\Scripts\python.exe -m exercises.check_lesson01
+python -m unittest discover -s tests -v
+python -m scripts.check_environment
+python -m scripts.run_demo           # scripted six-question demo, both arms
+python -m scripts.render_report      # HTML report of the demo run
 ```
 
-ही command तुझ्या function वर चार checks चालवते: row order, duplicate counts, empty inputs आणि input mutation. Input: तुझा saved `lesson01.py`. Output: चार tests आणि `OK`, किंवा सुधारायची failure. हा **Terminal command** आहे; Python function file मध्ये paste करायचा नाही. बदललेला function आणि output review साठी पाठव.
+Ask one question with a local model (setup in [docs/MODELS.md](docs/MODELS.md)):
 
-## पुढचे tasks, एकावेळी एक
+```bash
+ollama pull qwen2.5-coder:1.5b
+python -m scripts.ask --config configs/ollama.json --dataset data/demo --db-id shop \
+  --question "How many distinct orders are there?"
+```
 
-2. `tests/test_validation.py` मध्ये एक नवीन safe CTE आणि एक unsafe multi-statement case add कर. तो test एखादा खरा behavior तपासत आहे याची खात्री कर.
-3. Schema retrieval मध्ये एक संबंधित column का निवडला गेला ते शब्द/score वापरून समजाव. नवीन retrieval method स्वतंत्र config/run मध्ये compare कर.
-4. `demo_semantic` ची executable पण चुकीची query loop का दुरुस्त करत नाही ते लिही. Gold SQL repair prompt मध्ये टाकू नकोस.
-5. Real-model teaching run मधला एक failure inspect करून error category लिही. स्वतःचे actual observations वापर; fixture scores ला BIRD results म्हणू नकोस.
+## Demo output
 
-README/learning log मध्ये तुझे experiments आणि तू समजावू शकणारे बदल नोंदव. Code स्वतः समजून बदलणे आणि त्याचे पुरावे दाखवणे हे portfolio साठी उपयोगी आहे.
+[reports/demo_reference.html](reports/demo_reference.html) shows one run of the scripted demo on a small hand-made shop database. The model answers in the demo are scripted, so the numbers only show that the control flow works: a rejected write, a repaired execution error, a wrong but executable answer and exhausted repairs. They are not model accuracy.
+
+## Project layout
+
+```
+queryforgesql/   config, data, retrieval, prompts, providers, validation, sandbox, worker, pipeline, evaluation
+scripts/         run_demo, ask, evaluate, render_report, prepare_demo, fetch_bird, import_bird, check_splits
+configs/         demo.json, ollama.json, api.example.json
+tests/           unit and integration tests (standard library unittest)
+docs/            data, models, execution boundary, sources
+reports/         demo report
+```
+
+## Next steps
+
+See [EXPERIMENTS.md](EXPERIMENTS.md): run a real model on the demo questions, then on a frozen BIRD Mini-Dev subset, report unseen databases separately, and only then add LoRA fine-tuning as a third and fourth arm.
+
+## Data and licence
+
+BIRD data is not included. [docs/DATA.md](docs/DATA.md) and [docs/SOURCES.md](docs/SOURCES.md) explain how to download it and its licence. Code licence: [LICENSE](LICENSE).
