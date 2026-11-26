@@ -36,7 +36,7 @@ class DataTests(unittest.TestCase):
         assert_disjoint([Example("1", "one", "A", "SELECT 1")], [], [Example("2", "two", "B", "SELECT 2")])
 
     def test_changed_database_is_rejected_by_manifest(self):
-        with tempfile.TemporaryDirectory() as temp:
+        with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as temp:
             root = Path(temp)
             prepare_demo(root)
             path = root / "databases/shop/shop.sqlite"
@@ -55,7 +55,7 @@ class DataTests(unittest.TestCase):
     def test_download_retries_connection_reset_then_uses_cache(self):
         payload = b"verified data"
         response = io.BytesIO(payload)
-        with tempfile.TemporaryDirectory() as temp, redirect_stdout(io.StringIO()):
+        with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as temp, redirect_stdout(io.StringIO()):
             destination = Path(temp) / "data.json"
             with patch("urllib.request.urlopen", side_effect=[urllib.error.URLError(ConnectionResetError()), response]) as request, patch("time.sleep"):
                 download_verified("https://example.com/data", destination, hashlib.sha256(payload).hexdigest())
@@ -64,7 +64,7 @@ class DataTests(unittest.TestCase):
                 self.assertEqual(request.call_count, 2)
 
     def test_download_rejects_wrong_hash_without_writing(self):
-        with tempfile.TemporaryDirectory() as temp:
+        with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as temp:
             destination = Path(temp) / "data.json"
             with patch("urllib.request.urlopen", return_value=io.BytesIO(b"bad")):
                 with self.assertRaises(ValueError):
@@ -84,7 +84,7 @@ class DataTests(unittest.TestCase):
     def test_local_import_copies_offline_snapshot_and_preserves_provenance(self):
         # Exercise the BIRD-format import path with ORIGINAL teaching records,
         # not fabricated BIRD results or benchmark database contents.
-        with tempfile.TemporaryDirectory() as temp:
+        with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as temp:
             root = Path(temp)
             prepare_demo(root / "source")
             completed = subprocess.run([

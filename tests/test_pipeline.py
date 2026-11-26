@@ -76,7 +76,7 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(result["final_result"]["status"], "model_error")
 
     def test_public_examples_exclude_reference_sql(self):
-        with tempfile.TemporaryDirectory() as temp:
+        with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as temp:
             prepare_demo(Path(temp))
             examples = load_examples(Path(temp) / "examples.jsonl")
             self.assertTrue(all("gold_sql" not in example.public() for example in examples))

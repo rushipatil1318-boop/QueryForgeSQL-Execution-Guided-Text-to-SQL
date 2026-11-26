@@ -44,7 +44,7 @@ class ComparisonTests(unittest.TestCase):
 
 class ExperimentTests(unittest.TestCase):
     def test_demo_is_paired_logged_and_resumable(self):
-        with tempfile.TemporaryDirectory() as temp, redirect_stdout(io.StringIO()):
+        with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as temp, redirect_stdout(io.StringIO()):
             root = Path(temp)
             dataset, output = root / "data", root / "run"
             prepare_demo(dataset)

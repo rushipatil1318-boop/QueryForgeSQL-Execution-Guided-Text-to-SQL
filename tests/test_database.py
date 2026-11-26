@@ -13,7 +13,7 @@ from scripts.prepare_demo import prepare_demo
 class DatabaseTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.temp = tempfile.TemporaryDirectory()
+        cls.temp = tempfile.TemporaryDirectory(ignore_cleanup_errors=True)
         cls.directory = Path(cls.temp.name)
         prepare_demo(cls.directory)
         cls.db = database_path(cls.directory / "databases", "shop")
